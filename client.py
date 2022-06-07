@@ -1,7 +1,13 @@
 import socket
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-host = '192.168.0.113'
+addrs = socket.getaddrinfo(socket.gethostname(), None)
+
+for item in addrs:
+    if ':' not in item[4][0]:
+        host = item[4][0]
+        break
+
 port = 9092
 client.connect((host, port))
 
